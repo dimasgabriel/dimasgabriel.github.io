@@ -1,8 +1,13 @@
 body {
-    background-color:#ad2727
+    background-color:#002b70
+    
 }
 
 a {
         text-decoration: none;
         color:#1800f7;
+}
+
+.link {
+    color:gold;
 }
