@@ -71,7 +71,8 @@
  /*Showcase*/
  #showcase{
      min-height: 400px;
-     background:url('./img/showpicture.jpg') no-repeat 0 -400px;
+     max-width: 1600px;
+     background:url('./img/showpicture.jpg');
      text-align:center;
      color:#ffffff;
  }
