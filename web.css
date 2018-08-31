@@ -70,9 +70,13 @@
  
  /*Showcase*/
  #showcase{
-     min-height: 400px;
-     max-width: 1600px;
-     background:url('./img/showpicture.jpg');
+     min-height:400px;
+     background:url('./img/showpicture.jpg') no-repeat;
+     background-size: auto;
      text-align:center;
      color:#ffffff;
+ }
+ 
+ footer{
+     text-align: center
  }
