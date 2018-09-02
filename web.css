@@ -77,6 +77,15 @@
      color:#ffffff;
  }
  
+ /*Footer*/
+ 
  footer{
      text-align: center
  }
+ 
+ /*Any Highlight*/
+ 
+body{
+ outline-color: #ce1400   
+}
+ 
