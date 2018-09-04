@@ -22,11 +22,11 @@
 
 /**Header**/
  header{
-     background:#383970;
+     background:#010072;
      color:#ffffff;
      padding-top:30px;
      min-height:70px;
-     border-bottom:#0c0799 5px solid;
+     border-bottom:#88f700 5px solid;
  }
  
  header a{
@@ -58,29 +58,38 @@
  }
  
  header .highlight, header .current a{
-     color: #178c08;
+     color: #88f700;
      font-weight: bold
      
  }
  
  header a:hover{
-     color:#cccccc;
+     color:#2c3af9;
      font-weight: bold
  }
  
  /*Showcase*/
  #showcase{
      min-height:400px;
-     background:url('./img/showpicture.jpg') 100% 80%;
+     background:url('./img/background.jpg') 100% 80%;
      background-size: cover;
      text-align:center;
-     color:#ffffff;
+     color:#0016e8;
  }
+ 
+  #showcase1{
+     min-height:400px;
+     background:url('./img/book.jpg') 100% 80%;
+     background-size: cover;
+     text-align:center;
+     color:#0052d6;
+  }
  
  /*Footer*/
  
  footer{
-     text-align: center
+     text-align: center;
+     margin-bottom: 20px
  }
  
  /*Any Highlight*/
