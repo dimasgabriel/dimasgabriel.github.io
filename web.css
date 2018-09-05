@@ -26,7 +26,7 @@
      color:#ffffff;
      padding-top:30px;
      min-height:70px;
-     border-bottom:#88f700 5px solid;
+     border-bottom:#88f700 10px solid;
  }
  
  header a{
@@ -77,24 +77,22 @@
      color:#0016e8;
  }
  
-  #showcase1{
+   #showcase1{
      min-height:400px;
      background:url('./img/book.jpg') 100% 80%;
      background-size: cover;
      text-align:center;
-     color:#0052d6;
+     color:#ff0000;
+     overflow: hidden;
   }
  
  /*Footer*/
  
- footer{
+  footer{
      text-align: center;
-     margin-bottom: 20px
- }
+     margin-bottom: 20px;
+  }
  
- /*Any Highlight*/
- 
-body{
- outline-color: #ce1400   
+ body{
+  background-color: #aaaaaa;
 }
- 
