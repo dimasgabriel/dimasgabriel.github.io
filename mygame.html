@@ -49,7 +49,7 @@ void draw() {
     //Ball
     background(255);
     fill(17, 49, 255);
-    circle(x, y, rad);
+    ellipse(x, y, rad, rad);
     x = x + vx;
     y = y + vy;
 
@@ -151,8 +151,7 @@ void draw() {
 
   //this is just to test any value or boolean
   print(gameMode, ",");
-  print(gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450);
-  println(" ", "(",(int)mouseX, ",", (int)mouseY,")");
+  println(gameMode ==1);
   
 } //end of main method
 
@@ -200,7 +199,7 @@ void pauseButton() {        //if PAUSE hovered
 
 
 //checks the collision of the moving walls and the side stationary walls
-void sideCollision() {  //  left rect   ---------------------          right rect
+void sideCollision() {  //  left rect             right rect
   if ((x <= 50 && y>mouseY && y<mouseY+150) || (x >= 850 && y>mouseY && y<mouseY+150)) {
     vx = -vx;
     score++;
