@@ -2,7 +2,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Processing Demo</title>
-<script type="text/javascript" src="someFolder.js"></script>
+<script type="text/javascript" src="randomCode.js"></script>
 </head>
 <body>
 <script type="text/processing">
@@ -54,8 +54,8 @@ void draw() {
     y = y + vy;
 
     //side rectangles
-    rect(10, mouseY, 20, 150);
-    rect(870, mouseY, 20, 150);
+    rect(10, mouseY, 20, 150);  //LEFT rect
+    rect(870, mouseY, 20, 150); //RIGHT rect
 
 
     //Different text values
@@ -99,6 +99,7 @@ void draw() {
     sideCollision();
     pauseButton();
   } //end of in-game if statement
+      //INSTRUCTIONS SCREEN
   else if (gameNumber == 0 && timer >= 10) {
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
@@ -199,7 +200,7 @@ void pauseButton() {        //if PAUSE hovered
 
 
 //checks the collision of the moving walls and the side stationary walls
-void sideCollision() {  //  left rect                right rect
+void sideCollision() {  //  left rect   ---------------------          right rect
   if ((x <= 50 && y>mouseY && y<mouseY+150) || (x >= 850 && y>mouseY && y<mouseY+150)) {
     vx = -vx;
     score++;
@@ -255,9 +256,6 @@ void sideCollision() {  //  left rect                right rect
  y = (int)random(200, 700);
  */
  
- 
-
-
  
  
 
