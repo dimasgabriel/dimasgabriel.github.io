@@ -55,7 +55,7 @@ void draw() {
     y = y + vy;
 
     //side rectangles
-    if(demo_mode == true){
+  if (demo_mode == true){
       rectY = y-75;
       textSize(20);           //if in DEMO mode
       fill(0);
@@ -180,6 +180,9 @@ void draw() {
      demo_mode = false;
      gameMode = 1;
         }
+  //this is just to test any value or boolean
+  print(gameMode,",");
+  println(demo_mode == true && (x <= 50 && y>=(y-75)) || (x >= 850 && y>=(y-57)));
   
 } //end of main method
 
@@ -235,8 +238,8 @@ void pauseButton() {        //if PAUSE hovered
 
 
 //checks the collision of the moving walls and the side stationary walls
-void sideCollision() {  //  left rect   ---------------------          right rect
-  if ((x <= 50 && y>mouseY && y<mouseY+150) || (x >= 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x <= 50 && y>=(y-75)) || (x >= 850 && y>=(y-57)))) {
+void sideCollision() {  //  left rect               right rect
+  if ((x <= 50 && y>mouseY && y<mouseY+150) || (x >= 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x <= 50 || x >= 850) && (y>=rectY || y<=rectY+150))) {
     vx = -vx;
     score++;
     newscore = max(score, highscore);
