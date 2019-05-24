@@ -1,0 +1,85 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Processing Demo</title>
+<script type="text/javascript" src="randomCode.js"></script>
+</head>
+<body>
+<script type="text/processing">
+int Imgx = 0;
+PImage bg;
+int x = 100;
+float y = 250;
+float Vy = 0;
+float rad = 20 ;
+int score = 0;
+int startGame = 2;
+int keyvalue = 0;
+
+//Environment setup
+void setup(){
+ size(900,576);
+ bg = loadImage("./pipeimg.jpg");
+ textSize(32);
+  }
+
+//The main method
+void draw(){
+  if (startGame == 2){
+   image(bg, Imgx,0); 
+   image(bg,Imgx + bg.width,0);
+   Imgx--;
+   moveImage();
+   text("Score: " +(int)(rad-20) , 700, 60);
+   text("Real Radius: " +(double)rad , 230, 550); //This is written as a Double at the bottom
+   
+
+ 
+   fill(34,62,100);
+   circle(x,y,rad);
+   Vy+=.6;
+   y = Vy + y; 
+
+
+  /*these are when the 'f' && 'j' are pressed.
+  The object grows gradually every time a key is pressed. BE CAREFUL!
+  */
+  if (keyPressed && (key == 'f' || key == 'j')){
+    Vy = -4;
+    score++;
+    rad+=0.01;
+    }
+
+  } //end of the long if statement
+  
+
+  if (startGame == 3 && keyPressed && (key == 'f' || key =='j')){
+    startGame = 2;
+    x = 100;
+    y = 200;
+    rad = 20;
+  }
+  
+  //Other methods called
+  checkBoundaries(); 
+  coordiateTester();
+  
+  
+} //end of main method
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+</script>
+<canvas id="sketch" style="border: 1px solid black;"></canvas>
+</body>
+</html>
