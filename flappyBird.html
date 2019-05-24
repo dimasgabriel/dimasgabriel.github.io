@@ -36,7 +36,7 @@ void draw(){
 
  
    fill(34,62,100);
-   circle(x,y,rad);
+   ellipse(x,y,rad,rad);
    Vy+=.6;
    y = Vy + y; 
 
@@ -67,8 +67,35 @@ void draw(){
   
 } //end of main method
  
- 
+ //this is where the game stops if it hits the boundary
+void checkBoundaries(){
+  if (y<rad/2 || y>=483){
+    Vy++;
+    Imgx = 0;
+    text("You Failed",(width/2)-100, 300);
+    text("Your radius pixel size was " +(int)(rad-20), 250 , 350);
+    startGame = 3;     
+  }
+} //end of checkBoundaries()
 
+
+//this is a coordinate tester for the mouse
+void coordiateTester(){
+ if(keyPressed){
+  println("YPos: ", (int)y, "Radius: ", (double)rad); 
+ }
+}
+
+ //the moving of the image
+void moveImage(){
+ if (Imgx == -bg.width){
+  Imgx=0;   
+ }
+ 
+}
+
+ 
+ 
  
  
  
