@@ -9,14 +9,15 @@
 /*This is the first version of my game. The object of this game is to see who gets the highest score and who can adapt to the changing values.
  *As the score increases, the speed of the ball increases. This is to add a more level of difficulty.
  Author: Gabriel Dimas
- Version: 1.4
+ Version: 1.7
  */
 
 float x = random(200, 700);
-float y = random(200, 700);
+float y = 100;
 float vx = 3;
 float vy = 4;
 int rad = 50;
+float ballColorR = random(0, 255);
 int score = 0;
 int gameMode = 0; //0 = instruction screen and loser screen. 1 = Normal game operation. 2 = paused game. 3 = Demo mode
 int highscore = 0;
@@ -30,9 +31,10 @@ int colorG = 244;
 int colorB = 66;
 int timerColor = color(32, 199, 32);
 float rectY = mouseY;
-boolean demo_mode = false;
+boolean demo_mode = false;  //checks the boolean of demo mode
 String demo_message = "It's as simple as playing a game of ping pong. Except that the ball gets faster";
-
+PImage hsPic; //High score picture
+PImage gameOver; //Game over picture
 
 
 
@@ -41,15 +43,17 @@ void setup() {
   background(255);
   textSize(32);
   noStroke();
+  hsPic = loadImage("./highScorePic.png");
+  gameOver = loadImage("./gameOver.png");
 }
 
 void draw() {  
+  float rectY = mouseY;
   //Start of Game
-    float rectY = mouseY;
   if (gameMode == 1) {
     //Ball
     background(255);
-    fill(17, 49, 255);
+    fill(ballColorR, abs(400-y), rectY);
     ellipse(x, y, rad, rad);
     x = x + vx;
     y = y + vy;
@@ -58,13 +62,13 @@ void draw() {
   if (demo_mode == true){
       rectY = y-75;
       textSize(20);           //if in DEMO mode
-      fill(0);
+      fill(y, ballColorR, rectY);
       text(demo_message, 20, 700);
       text("DEMO", 500, 40);
           }
           else{textSize(30);}
-    rect(10, rectY, 20, 150);  //LEFT rect
-    rect(870, rectY, 20, 150); //RIGHT rect
+    rect(10, rectY, 20, 150,25);  //LEFT rect
+    rect(870, rectY, 20, 150,25); //RIGHT rect
 
 
     //Different text values
@@ -106,17 +110,19 @@ void draw() {
               }
     }//end of "timer" values
 
-    //Other Methods being called(see methods below)
+    //Other Methods or Variables being called(see methods below)
     checkBoundaries(); 
     sideCollision();
     pauseButton();
+    colorChange();
   } //end of in-game if statement
       //INSTRUCTIONS SCREEN
-  else if (gameNumber == 0 && timer == 10 && demo_mode == false) {
+  else if (gameNumber == 0 && timer == 10 && demo_mode == false && y == 100) {
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
-    text("Good Luck!!!", 300, 450);
-    text("Press any key or click to begin", 170, 550);
+    text("Press C to change the color.", 80, 400);
+    text("Good Luck!!!", 300, 500);
+    text("Press any key or click to begin", 170, 600);
     fill(0);
     if (gameMode == 0 && (keyPressed || mousePressed)) {
       gameMode = 1;
@@ -161,6 +167,7 @@ void draw() {
      gameMode = 1;
      timer = 10;
      score = 0;
+     highscore = 0;
      rad = 50;
      speedlevel = 1;
      vx = 3;
@@ -171,6 +178,7 @@ void draw() {
   if (gameMode == 2 && demo_mode == true && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed) {
      timer = 10;
      score = 0;
+     highscore = 0;
      rad = 50;
      speedlevel = 1;
      vx = 3;
@@ -180,6 +188,9 @@ void draw() {
      demo_mode = false;
      gameMode = 1;
         }
+  //this is just to test any value or boolean
+  print("Vx: ",vx,",");
+  println("Vy: ", vy);
   
 } //end of main method
 
@@ -235,8 +246,8 @@ void pauseButton() {        //if PAUSE hovered
 
 
 //checks the collision of the moving walls and the side stationary walls
-void sideCollision() {  //  left rect               right rect
-  if ((x <= 50 && y>mouseY && y<mouseY+150) || (x >= 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x <= 50 || x >= 850) && (y>=rectY || y<=rectY+150))) {
+void sideCollision() {  //  left rect               right rect                              if in DEMO mode
+  if ((x < 50 && y>mouseY && y<mouseY+150) || (x > 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x < 50 || x > 850) && (y>=rectY || y<=rectY+150))) {
     vx = -vx;
     score++;
     newscore = max(score, highscore);
@@ -247,6 +258,9 @@ void sideCollision() {  //  left rect               right rect
     gameNumber++;
     text("Your final score was " +score, 250, 300);
     text("Click below to play again", 225, 400);
+    if(score<=highscore){
+    image(gameOver, 550,450);
+        }
   }
   //"Play Again" on finish screen
   if (gameMode == 0) {
@@ -276,8 +290,15 @@ void sideCollision() {  //  left rect               right rect
   if (gameMode == 0 && score > highscore) {
     text("Yay! You beat the High Score!", 200, 200);
     highscore = newscore;
+    image(hsPic, 550,425);
   }
 } //end of sideCollision method
+
+void colorChange(){
+ if(keyPressed && key == 'c'){
+   ballColorR = random(0, 255);
+     }
+}
 
 
 /* Misc.(gameMode == 1)--->Initial of the game
@@ -291,6 +312,10 @@ void sideCollision() {  //  left rect               right rect
  x = (int)random(200, 700);
  y = (int)random(200, 700);
  */
+ 
+
+
+
  
 
 
