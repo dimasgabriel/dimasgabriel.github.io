@@ -9,7 +9,7 @@
 /*This is the first version of my game. The object of this game is to see who gets the highest score and who can adapt to the changing values.
  *As the score increases, the speed of the ball increases. This is to add a more level of difficulty.
  Author: Gabriel Dimas
- Version: 1.9
+ Version: 2.0
  */
 
 float x = random(200, 700);
@@ -26,6 +26,7 @@ float timer = 10;
 int speedlevel = 1;
 int gameNumber = 0;
 int restartCounter = 0;
+int bgColor = 255;
 int colorR = 88;
 int colorG = 244;
 int colorB = 66;
@@ -43,7 +44,7 @@ PImage gameOver; //Game over picture
 
 void setup() {
   size(900, 800);
-  background(255);
+  background(bgColor);
   textSize(32);
   noStroke();
   hsPic = loadImage("./highScorePic.png");
@@ -58,7 +59,7 @@ void draw() {
   //Start of Game
   if (gameMode == 1) {
     //Ball
-    background(255);
+    background(abs(bgColor));
     fill(ballColor);
     ellipse(x, y, rad, rad);
     x = x + vx;
@@ -204,9 +205,7 @@ void draw() {
      gameMode = 1;
         }
   //this is just to test any value or boolean
-  print("Vx: ",abs(vx),",");
-  print(restartCounter);
-  println("Vy: ", abs(vy));
+  println(bgColor);
   
 } //end of main method
 
@@ -268,6 +267,9 @@ void sideCollision() {  //  left rect               right rect                  
     score++;
     newscore = max(score, highscore);
   }
+  if(score != 0){
+    bgColor--;
+    }
   //Left and Right Walls(boundaries)
   if (x<rad/2 || x>width) {
     gameMode = 0;
@@ -328,6 +330,8 @@ void colorChange(){
  y = (int)random(200, 700);
  */
  
+
+
 
 
  
