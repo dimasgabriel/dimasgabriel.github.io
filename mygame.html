@@ -9,7 +9,7 @@
 /*This is the first version of my game. The object of this game is to see who gets the highest score and who can adapt to the changing values.
  *As the score increases, the speed of the ball increases. This is to add a more level of difficulty.
  Author: Gabriel Dimas
- Version: 2.0
+ Version: 2.1
  */
 
 float x = random(200, 700);
@@ -59,7 +59,7 @@ void draw() {
   //Start of Game
   if (gameMode == 1) {
     //Ball
-    background(abs(bgColor));
+    background(0,0,abs(bgColor));
     fill(ballColor);
     ellipse(x, y, rad, rad);
     x = x + vx;
@@ -127,7 +127,6 @@ void draw() {
     checkBoundaries(); 
     sideCollision();
     pauseButton();
-    colorChange();
   } //end of in-game if statement
       //INSTRUCTIONS SCREEN
   else if (gameNumber == 0 && timer == 10 && demo_mode == false && y == 100) {
@@ -269,6 +268,9 @@ void sideCollision() {  //  left rect               right rect                  
   }
   if(score != 0){
     bgColor--;
+    if(bgColor%255 == 0){
+      bgColor = abs(bgColor);
+          }
     }
   //Left and Right Walls(boundaries)
   if (x<rad/2 || x>width) {
@@ -311,11 +313,6 @@ void sideCollision() {  //  left rect               right rect                  
   }
 } //end of sideCollision method
 
-void colorChange(){
- if(keyPressed && key == 'f'){
-   ballColor = (int)random(0, 255);
-     }
-}
 
 
 /* Misc.(gameMode == 1)--->Initial of the game
@@ -330,6 +327,7 @@ void colorChange(){
  y = (int)random(200, 700);
  */
  
+
 
 
 
