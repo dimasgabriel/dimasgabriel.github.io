@@ -9,7 +9,7 @@
 /*This is the first version of my game. The object of this game is to see who gets the highest score and who can adapt to the changing values.
  *As the score increases, the speed of the ball increases. This is to add a more level of difficulty.
  Author: Gabriel Dimas
- Version: 1.7
+ Version: 1.9
  */
 
 float x = random(200, 700);
@@ -17,7 +17,6 @@ float y = 100;
 float vx = 3;
 float vy = 4;
 int rad = 50;
-float ballColorR = random(0, 255);
 int score = 0;
 int gameMode = 0; //0 = instruction screen and loser screen. 1 = Normal game operation. 2 = paused game. 3 = Demo mode
 int highscore = 0;
@@ -29,6 +28,7 @@ int gameNumber = 0;
 int colorR = 88;
 int colorG = 244;
 int colorB = 66;
+int ballColor;
 int timerColor = color(32, 199, 32);
 float rectY = mouseY;
 boolean demo_mode = false;  //checks the boolean of demo mode
@@ -53,7 +53,7 @@ void draw() {
   if (gameMode == 1) {
     //Ball
     background(255);
-    fill(ballColorR, abs(400-y), rectY);
+    fill(ballColor);
     ellipse(x, y, rad, rad);
     x = x + vx;
     y = y + vy;
@@ -62,7 +62,7 @@ void draw() {
   if (demo_mode == true){
       rectY = y-75;
       textSize(20);           //if in DEMO mode
-      fill(y, ballColorR, rectY);
+      ballColor = color(9,167,229);      
       text(demo_message, 20, 700);
       text("DEMO", 500, 40);
           }
@@ -99,9 +99,12 @@ void draw() {
     }
     if (timer<4) {
       timerColor = color(226, 34, 34);
+      ballColor = color(226,34,34);
     } else {
       timerColor = color(32, 199, 32);
+      ballColor = color(9,167,229);
     }
+    
     if (speedlevel == 3 || speedlevel == 10 || speedlevel == 15) {
       fill(226, 34, 34);      
       text("The speed is increasing!", 200, 100);
@@ -120,7 +123,7 @@ void draw() {
   else if (gameNumber == 0 && timer == 10 && demo_mode == false && y == 100) {
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
-    text("Press C to change the color.", 80, 400);
+    text("Press F to change the color.", 80, 400);
     text("Good Luck!!!", 300, 500);
     text("Press any key or click to begin", 170, 600);
     fill(0);
@@ -189,6 +192,7 @@ void draw() {
      gameMode = 1;
         }
   //this is just to test any value or boolean
+
   
 } //end of main method
 
@@ -284,7 +288,6 @@ void sideCollision() {  //  left rect               right rect                  
       }
     }
   }
-
   if (gameMode == 0 && score > highscore) {
     text("Yay! You beat the High Score!", 200, 200);
     highscore = newscore;
@@ -293,8 +296,8 @@ void sideCollision() {  //  left rect               right rect                  
 } //end of sideCollision method
 
 void colorChange(){
- if(keyPressed && key == 'c'){
-   ballColorR = random(0, 255);
+ if(keyPressed && key == 'f'){
+   ballColor = (int)random(0, 255);
      }
 }
 
@@ -313,8 +316,6 @@ void colorChange(){
  
 
 
-
- 
 
 
  
