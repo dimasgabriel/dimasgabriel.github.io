@@ -25,6 +25,7 @@ int counter;
 float timer = 10;
 int speedlevel = 1;
 int gameNumber = 0;
+int restartCounter = 0;
 int colorR = 88;
 int colorG = 244;
 int colorB = 66;
@@ -32,7 +33,9 @@ int ballColor;
 int timerColor = color(32, 199, 32);
 float rectY = mouseY;
 boolean demo_mode = false;  //checks the boolean of demo mode
-String demo_message = "It's as simple as playing a game of ping pong. Except that the ball gets faster";
+String demo_message;
+PImage introPic;
+PImage luckyPic;
 PImage hsPic; //High score picture
 PImage gameOver; //Game over picture
 
@@ -45,6 +48,9 @@ void setup() {
   noStroke();
   hsPic = loadImage("./highScorePic.png");
   gameOver = loadImage("./gameOver.png");
+  introPic = loadImage("./introImg.jpeg");
+  luckyPic = loadImage("./luckyPic.jpg");
+  demo_message = "It's as simple as playing a game of ping pong. Except that the ball gets faster";
 }
 
 void draw() {  
@@ -97,6 +103,9 @@ void draw() {
       vy*=1.2;
       rad-=1;
     }
+    if(timer>6 && speedlevel == 1 && demo_mode == false && restartCounter == 0 && gameNumber == 0){
+      image(luckyPic, 30,40);
+    }
     if (timer<4) {
       timerColor = color(226, 34, 34);
       ballColor = color(226,34,34);
@@ -121,6 +130,8 @@ void draw() {
   } //end of in-game if statement
       //INSTRUCTIONS SCREEN
   else if (gameNumber == 0 && timer == 10 && demo_mode == false && y == 100) {
+    image(introPic,0,0);
+    fill(229,82,9);
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
     text("Press F to change the color.", 80, 400);
@@ -162,6 +173,7 @@ void draw() {
     vy = 4;
     x = (int)random(200, 700);
     y = (int)random(200, 700);
+    restartCounter++;
   }
 
   //DEMO button
@@ -192,7 +204,9 @@ void draw() {
      gameMode = 1;
         }
   //this is just to test any value or boolean
-
+  print("Vx: ",abs(vx),",");
+  print(restartCounter);
+  println("Vy: ", abs(vy));
   
 } //end of main method
 
@@ -314,8 +328,6 @@ void colorChange(){
  y = (int)random(200, 700);
  */
  
-
-
 
 
  
