@@ -79,12 +79,16 @@ void draw() {
 
 
     //Different text values
-    text("Game Number: "+(gameNumber+1), 30, 30);
     text("Score: " +score, 700, 30);
-    text("Highscore: " +highscore, 650, 60);
     text("Speed Level: " +speedlevel, 630, 775);
     fill(timerColor); 
     text((int)timer, (width/2)-40, (height/2)+30);
+    if (demo_mode == true){
+       text("Game Number: DEMO", 30, 30);
+       text("Highscore: DEMO", 650, 60);
+          }
+          else{text("Game Number: "+(gameNumber+1), 30, 30);
+              text("Highscore: " +highscore, 650, 60);}
 
     //Pause button border
     fill(colorR, colorG, colorB);
@@ -157,12 +161,12 @@ void draw() {
     y = (int)random(200, 700);
   }
 
-  //RESUME button
+  //RESUME button(ACTION)
   if (gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>200 && mouseY<250 && mousePressed) {
     gameMode = 1;
       } 
 
-  //RESTART button
+  //RESTART button(ACTION)
   if (gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>300 && mouseY<350 && mousePressed) {
     gameMode = 1;
     timer = 10;
@@ -176,7 +180,7 @@ void draw() {
     restartCounter++;
   }
 
-  //DEMO button
+  //DEMO button(ACTION)
   if (gameMode == 2 && demo_mode == false && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed) {
      demo_mode = true;
      gameMode = 1;
@@ -204,7 +208,6 @@ void draw() {
      gameMode = 1;
         }
   //this is just to test any value or boolean
-
   
 } //end of main method
 
@@ -266,6 +269,7 @@ void sideCollision() {  //  left rect               right rect                  
     score++;
     newscore = max(score, highscore);
   }
+      //Background Pulse
   if(score != 0){
     bgColor--;
     if(bgColor%255 == 0){
@@ -274,10 +278,13 @@ void sideCollision() {  //  left rect               right rect                  
     }
   //Left and Right Walls(boundaries)
   if (x<rad/2 || x>width) {
+    background(abs(bgColor));
     gameMode = 0;
-    gameNumber++;
     text("Your final score was " +score, 250, 300);
     text("Click below to play again", 225, 400);
+    if (demo_mode == false){
+	gameNumber++;
+	      }
     if(score<=highscore){
     image(gameOver, 550,450);
         }
@@ -327,6 +334,10 @@ void sideCollision() {  //  left rect               right rect                  
  y = (int)random(200, 700);
  */
  
+
+
+
+
 
 
 
