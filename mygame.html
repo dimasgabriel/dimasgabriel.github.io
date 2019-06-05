@@ -35,7 +35,7 @@ int timerColor = color(32, 199, 32);
 float rectXL = 10;
 float rectXR = 870;
 float rectY = mouseY;
-boolean demo_mode = false;  //checks the boolean of demo mode
+boolean demo_mode = false;  //checks the boolean of demo/hard mode
 boolean hardMode = false;
 String demo_message;
 PImage introPic;
@@ -63,29 +63,30 @@ void draw() {
   //Start of Game
   if (gameMode == 1) {
     //Ball
-    background(0,0,abs(bgColor));
+    background(0, 0, abs(bgColor));
     fill(ballColor);
     ellipse(x, y, rad, rad);
     x = x + vx;
     y = y + vy;
 
     //side rectangles
-  if (demo_mode == true){
+    if (demo_mode == true) {
       rectXL = 10;
       rectY = y-75;
       textSize(20);           //if in DEMO mode
-      ballColor = color(9,167,229);      
+      ballColor = color(9, 167, 229);      
       text(demo_message, 20, 700);
       text("DEMO", 500, 40);
-          }
-          else{textSize(30);}
-   if (hardMode == true){
-     rectXL = mouseX;
-     rectY = mouseY;
-     text("Hard Mode", 500, 40);
-         }
-    rect(rectXL, rectY, 20, 150,25);  //LEFT rect
-    rect(rectXR, rectY, 20, 150,25); //RIGHT rect
+    } else {
+      textSize(30);
+    }
+    if (hardMode == true) {
+      rectXL = mouseX;
+      rectY = mouseY;
+      text("Hard Mode", 500, 40);
+    }
+    rect(rectXL, rectY, 20, 150, 25);  //LEFT rect
+    rect(rectXR, rectY, 20, 150, 25); //RIGHT rect
 
 
     //Different text values
@@ -93,21 +94,24 @@ void draw() {
     text("Speed Level: " +speedlevel, 630, 775);
     fill(timerColor); 
     text((int)timer, (width/2)-40, (height/2)+30);
-    if (demo_mode == true){
-       text("Game Number: DEMO", 30, 30);
-       text("Highscore: DEMO", 650, 60);
-          }
-          else{fill(timerColor); text("Game Number: "+(gameNumber+1), 30, 30);
-              text("Highscore: " +highscore, 650, 60);}
-      //Background Pulse
-    if(gameMode == 1){
-      bgColor--;
-      if(bgColor%255 == 0){
-        bgColor = abs(bgColor);
-           }
+    if (demo_mode == true) {
+      text("Game Number: DEMO", 30, 30);
+      text("Highscore: DEMO", 650, 60);
+    } else {
+      fill(timerColor); 
+      text("Game Number: "+(gameNumber+1), 30, 30);
+      text("Highscore: " +highscore, 650, 60);
     }
+    //Background Pulse
+    if (gameMode == 1) {
+      bgColor--;
+      if (bgColor%255 == 0) {
+        bgColor = abs(bgColor);
+      }
+    }          
 
-    //Pause button border
+
+    //Pause button (BORDER)
     fill(colorR, colorG, colorB);
     rect(300, 20, 110, 50);
     fill(244, 66, 66);
@@ -125,23 +129,23 @@ void draw() {
       vy*=1.2;
       rad-=1;
     }
-    if(timer>6 && speedlevel == 1 && demo_mode == false && restartCounter == 0 && gameNumber == 0 && highscore == 0){
-      image(luckyPic, 30,40);
+    if (timer>6 && speedlevel == 1 && demo_mode == false && restartCounter == 0 && gameNumber == 0 && highscore == 0) {
+      image(luckyPic, 30, 40);
     }
     if (timer<4) {
       timerColor = color(226, 34, 34);
-      ballColor = color(226,34,34);
+      ballColor = color(226, 34, 34);
     } else {
       timerColor = color(32, 199, 32);
-      ballColor = color(9,167,229);
+      ballColor = color(9, 167, 229);
     }
-    
-    if (speedlevel == 3 || speedlevel == 10 || speedlevel == 15) {
+
+    if ((speedlevel == 3 || speedlevel == 10 || speedlevel == 15) && timer>5) {
       fill(226, 34, 34);      
-      text("The speed is increasing!", 200, 100);
-      if(speedlevel == 3 && demo_mode == true){
-         text("Press Pause to try it!", 200, 150);
-              }
+      text("The speed is increasing!", 250, height/2);
+      if (speedlevel == 3 && demo_mode == true) {
+        text("Press Pause to try it!", 200, 150);
+      }
     }//end of "timer" values
 
     //Other Methods or Variables being called(see methods below)
@@ -150,10 +154,10 @@ void draw() {
     pauseButton();
     hardModeMethod();
   } //end of in-game if statement
-      //INSTRUCTIONS SCREEN
+  //INSTRUCTIONS SCREEN
   else if (gameNumber == 0 && timer == 10 && demo_mode == false && y == 100) {
-    image(introPic,0,0);
-    fill(229,82,9);
+    image(introPic, 0, 0);
+    fill(229, 82, 9);
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
     text("Press F to change the color.", 80, 400);
@@ -167,13 +171,13 @@ void draw() {
     text("Hard Mode", 360, 735);
     if (gameMode == 0 && (keyPressed || mousePressed)) {
       gameMode = 1;
-          //Hard mode(ACTION)
-      if(mouseX>335 && mouseX<535 && mouseY>700 && mouseY<750 && mousePressed){
-         hardMode = true;
-         gameMode = 1;
-          }
-        }
-      //Hard Mode(BORDERS)
+      //Hard mode(ACTION)
+      if (mouseX>335 && mouseX<535 && mouseY>700 && mouseY<750 && mousePressed) {
+        hardMode = true;
+        gameMode = 1;
+      }//end of Instruction screen
+    }
+    //Hard Mode(BORDERS)
     fill(colorR, colorG, colorB);
     rect(335, 700, 200, 50);
     fill(17, 49, 245);
@@ -197,7 +201,7 @@ void draw() {
   //RESUME button(ACTION)
   if (gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>200 && mouseY<250 && mousePressed) {
     gameMode = 1;
-      } 
+  } 
 
   //RESTART button(ACTION)
   if (gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>300 && mouseY<350 && mousePressed) {
@@ -215,59 +219,59 @@ void draw() {
 
   //DEMO button(ACTION)
   if (gameMode == 2 && demo_mode == false && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed) {
-     demo_mode = true;
-     gameMode = 1;
-     timer = 10;
-     score = 0;
-     highscore = 0;
-     rad = 50;
-     speedlevel = 1;
-     vx = 3;
-     vy = 4;
-     x = (int)random(200, 700);
-     y = (int)random(200, 700);
-        }
+    demo_mode = true;
+    gameMode = 1;
+    timer = 10;
+    score = 0;
+    highscore = 0;
+    rad = 50;
+    speedlevel = 1;
+    vx = 3;
+    vy = 4;
+    x = (int)random(200, 700);
+    y = (int)random(200, 700);
+  }
   if (gameMode == 2 && demo_mode == true && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed) {
-     timer = 10;
-     score = 0;
-     rad = 50;
-     speedlevel = 1;
-     vx = 3;
-     vy = 4;
-     x = (int)random(200, 700);
-     y = (int)random(200, 700);
-     demo_mode = false;
-     gameMode = 1;
-        }
-    
-     //Hard Mode(ACTION)
-   if (gameMode == 2 && hardMode == false && mouseX>400 && mouseX<520 && mouseY>500 && mouseY<550 && mousePressed) {
-     hardMode = true;
-     gameMode = 1;
-     timer = 10;
-     score = 0;
-     rad = 50;
-     speedlevel = 1;
-     vx = 3;
-     vy = 4;
-     x = (int)random(200, 700);
-     y = (int)random(200, 700);
-        }
+    timer = 10;
+    score = 0;
+    rad = 50;
+    speedlevel = 1;
+    vx = 3;
+    vy = 4;
+    x = (int)random(200, 700);
+    y = (int)random(200, 700);
+    demo_mode = false;
+    gameMode = 1;
+  }
+
+  //Hard Mode(ACTION)
+  if (gameMode == 2 && hardMode == false && mouseX>400 && mouseX<520 && mouseY>500 && mouseY<550 && mousePressed) {
+    hardMode = true;
+    gameMode = 1;
+    timer = 10;
+    score = 0;
+    rad = 50;
+    speedlevel = 1;
+    vx = 3;
+    vy = 4;
+    x = (int)random(200, 700);
+    y = (int)random(200, 700);
+  }
   if (gameMode == 2 && hardMode == true && mouseX>400 && mouseX<520 && mouseY>500 && mouseY<550 && mousePressed) {
-     timer = 10;
-     score = 0;
-     rad = 50;
-     speedlevel = 1;
-     vx = 3;
-     vy = 4;
-     x = (int)random(200, 700);
-     y = (int)random(200, 700);
-     hardMode = false;
-     gameMode = 1;
-     rectXL = 10;
-        }
+    timer = 10;
+    score = 0;
+    rad = 50;
+    speedlevel = 1;
+    vx = 3;
+    vy = 4;
+    x = (int)random(200, 700);
+    y = (int)random(200, 700);
+    hardMode = false;
+    gameMode = 1;
+    rectXL = 10;
+  }
   //this is just to test any value or boolean
-  
+  //NONE
 } //end of main method
 
 
@@ -300,32 +304,32 @@ void pauseButton() {        //if PAUSE hovered
       text("Restart", 400, 330);  
 
       //"Demo/Try It!" button
-      if (demo_mode == false){
+      if (demo_mode == false) {
         fill(colorR, colorG, colorB);
         rect(400, 400, 120, 50);
         fill(255);
         text("Demo", 400, 430);
-            }
-      if (demo_mode == true){
+      }
+      if (demo_mode == true) {
         fill(colorR, colorG, colorB);
         rect(400, 400, 120, 50);
         fill(255);
         text("Try It!", 400, 430);
-            }
-            
-      //"Easy Mode" button
-      if (hardMode == false){
+      }
+
+      //"Easy/Hard Mode" button
+      if (hardMode == false) {
         fill(colorR, colorG, colorB);
         rect(400, 500, 120, 50);
         fill(255);
         text("Hard", 400, 530);
-            }
-      if (hardMode == true){
+      }
+      if (hardMode == true) {
         fill(colorR, colorG, colorB);
         rect(400, 500, 120, 50);
         fill(255);
         text("Easy", 400, 530);
-            }      
+      }
     }
   } else {
     colorR = 88;
@@ -337,30 +341,23 @@ void pauseButton() {        //if PAUSE hovered
 
 //checks the collision of the moving walls and the side stationary walls
 void sideCollision() {  //  left rect               right rect                              
-  if ((x < 50 && y>mouseY && y<mouseY+150) || (x > 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x < 50 || x > 850) && (y>=rectY || y<=rectY+150))){
+  if ((x < 50 && y>mouseY && y<mouseY+150) || (x > 850 && y>mouseY && y<mouseY+150) || (demo_mode == true && (x < 50 || x > 850) && (y>=rectY || y<=rectY+150))) {
     vx = -vx;
     score++;
     newscore = max(score, highscore);
-    }
-      //Background Pulse
-  if(score != 0){
-    bgColor--;
-    if(bgColor%255 == 0){
-      bgColor = abs(bgColor);
-          }
-    }
+  }
   //Left and Right Walls(boundaries)
   if (x<rad/2 || x>width) {
     background(abs(bgColor));
     gameMode = 0;
     text("Your final score was " +score, 250, 300);
     text("Click below to play again", 225, 400);
-    if (demo_mode == false){
-  gameNumber++;
-        }
-    if(score<=highscore){
-    image(gameOver, 550,450);
-        }
+    if (demo_mode == false) {
+      gameNumber++;
+    }
+    if (score<=highscore) {
+      image(gameOver, 550, 450);
+    }
   }
   //"Play Again" on finish screen
   if (gameMode == 0) {
@@ -389,26 +386,23 @@ void sideCollision() {  //  left rect               right rect
   if (gameMode == 0 && score > highscore) {
     text("Yay! You beat the High Score!", 200, 200);
     highscore = newscore;
-    image(hsPic, 550,425);
+    image(hsPic, 550, 425);
   }
 } //end of sideCollision method
 
-void hardModeMethod(){
- if (hardMode == true && x>mouseX && x<=(mouseX+20) && y>mouseY && y<(mouseY+150)){
-   vx = -vx;
-   score++;
- }
- 
-                                   //When in hard mode and DEMO is pressed
- if(hardMode == true && gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed){
-   rectXL = 10;
-   hardMode = false;
-   demo_mode = true;
-   gameMode = 1;
- }
-  
-  
-  
+void hardModeMethod() {
+  if (hardMode == true && x>mouseX && x<=(mouseX+20) && y>mouseY && y<(mouseY+150)) {
+    vx = -vx;
+    score++;
+  }
+
+  //When in hard mode and DEMO is pressed
+  if (hardMode == true && gameMode == 2 && mouseX>400 && mouseX<520 && mouseY>400 && mouseY<450 && mousePressed) {
+    rectXL = 10;
+    hardMode = false;
+    demo_mode = true;
+    gameMode = 1;
+  }
 }
 
 
@@ -424,8 +418,6 @@ void hardModeMethod(){
  x = (int)random(200, 700);
  y = (int)random(200, 700);
  */
- 
-
 
 
 
