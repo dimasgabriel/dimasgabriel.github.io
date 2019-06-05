@@ -99,7 +99,13 @@ void draw() {
           }
           else{fill(timerColor); text("Game Number: "+(gameNumber+1), 30, 30);
               text("Highscore: " +highscore, 650, 60);}
-
+      //Background Pulse
+    if(gameMode == 1){
+      bgColor--;
+      if(bgColor%255 == 0){
+        bgColor = abs(bgColor);
+           }
+    }
 
     //Pause button border
     fill(colorR, colorG, colorB);
