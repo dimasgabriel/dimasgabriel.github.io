@@ -9,7 +9,7 @@
 /*This is the first version of my game. The object of this game is to see who gets the highest score and who can adapt to the changing values.
  *As the score increases, the speed of the ball increases. This is to add a more level of difficulty.
  Author: Gabriel Dimas
- Version: 2.3
+ Version: 2.5
  */
 
 float x = random(200, 700);
@@ -50,10 +50,10 @@ void setup() {
   background(bgColor);
   textSize(32);
   noStroke();
-  hsPic = loadImage("./img/highScorePic.png");
-  gameOver = loadImage("./img/gameOver.png");
-  introPic = loadImage("./img/introImg.jpeg");
-  luckyPic = loadImage("./img/luckyPic.jpg");
+  hsPic = loadImage("./highScorePic.png");
+  gameOver = loadImage("./gameOver.png");
+  introPic = loadImage("./introImg.jpeg");
+  luckyPic = loadImage("./luckyPic.jpg");
   demo_message = "It's as simple as playing a game of ping pong. Except that the ball gets faster";
 }
 
@@ -147,6 +147,15 @@ void draw() {
         text("Press Pause to try it!", 200, 150);
       }
     }//end of "timer" values
+    
+    if(keyPressed && key == 'f'){
+      vx *= 1.03;
+      vy *= 1.03;
+        }
+    if(keyPressed && key == 'j'){
+      vx += 0.1;
+      vy += 0.1;
+        }
 
     //Other Methods or Variables being called(see methods below)
     checkBoundaries(); 
@@ -160,7 +169,7 @@ void draw() {
     fill(229, 82, 9);
     text("Instructions: Every time you hit the blue wall,", 20, 300);
     text("      you gain point. The speed of the ball increases.", 20, 350);
-    text("Press F to change the color.", 80, 400);
+    text("Press F to increase speed or J to decrease.", 80, 400);
     text("Good Luck!!!", 300, 500);
     text("Press any key or click to begin", 170, 600);
     fill(0);
@@ -271,7 +280,8 @@ void draw() {
     rectXL = 10;
   }
   //this is just to test any value or boolean
-  //NONE
+  print(abs(vx), ",");
+  println(abs(vy));
 } //end of main method
 
 
