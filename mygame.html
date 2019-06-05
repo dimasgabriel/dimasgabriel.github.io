@@ -51,6 +51,7 @@ void setup() {
   background(bgColor);
   textSize(32);
   noStroke();
+  smooth();
   hsPic = loadImage("./img/highScorePic.png");
   gameOver = loadImage("./img/gameOver.png");
   introPic = loadImage("./img/introImg.jpeg");
@@ -65,7 +66,7 @@ void draw() {
   //Start of Game
   if (gameMode == 1) {
     //Ball
-    background(0, 0, abs(bgColor));
+    background(0, abs(bgColor), abs(bgColor));
     fill(ballColor);
     ellipse(x, y, rad, rad);
     x = x + vx;
@@ -116,7 +117,7 @@ void draw() {
 
     //Pause button (BORDER)
     fill(colorR, colorG, colorB);
-    rect(300, 20, 110, 50);
+    rect(300, 20, 110, 50,25);
     fill(244, 66, 66);
     text("Pause", 310, 60);
 
@@ -304,42 +305,42 @@ void pauseButton() {        //if PAUSE hovered
       gameMode = 2;
       //"Resume" button
       fill(colorR, colorG, colorB);
-      rect(400, 200, 120, 50);
+      rect(400, 200, 120, 50,25);
       fill(255);
-      text("Resume", 400, 230);
+      text("Resume", 405, 230);
 
       //"Restart" button
       fill(colorR, colorG, colorB);
-      rect(400, 300, 120, 50);
+      rect(400, 300, 120, 50,25);
       fill(255);
-      text("Restart", 400, 330);  
+      text("Restart", 405, 330);  
 
       //"Demo/Try It!" button
       if (demo_mode == false) {
         fill(colorR, colorG, colorB);
-        rect(400, 400, 120, 50);
+        rect(400, 400, 120, 50,25);
         fill(255);
-        text("Demo", 400, 430);
+        text("Demo", 405, 430);
       }
       if (demo_mode == true) {
         fill(colorR, colorG, colorB);
-        rect(400, 400, 120, 50);
+        rect(400, 400, 120, 50,25);
         fill(255);
-        text("Try It!", 400, 430);
+        text("Try It!", 405, 430);
       }
 
       //"Easy/Hard Mode" button
       if (hardMode == false) {
         fill(colorR, colorG, colorB);
-        rect(400, 500, 120, 50);
+        rect(400, 500, 120, 50,25);
         fill(255);
-        text("Hard", 400, 530);
+        text("Hard", 405, 530);
       }
       if (hardMode == true) {
         fill(colorR, colorG, colorB);
-        rect(400, 500, 120, 50);
+        rect(400, 500, 120, 50,25);
         fill(255);
-        text("Easy", 400, 530);
+        text("Easy", 405, 530);
       }
     }
   } else {
